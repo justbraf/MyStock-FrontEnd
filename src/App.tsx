@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/show" element={<ShowCustomers />} />
-        <Route path="/transactions/:custid" element={<ShowTransactions />} />
+        <Route path="/transactions/:acctID" element={<ShowTransactions />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

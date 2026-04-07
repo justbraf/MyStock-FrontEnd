@@ -9,7 +9,8 @@ const ShowCustomers = () => {
     lastname: string,
     email: string,
     address: string,
-    birthdate: string
+    birthdate: string,
+    accounts: number[]
   }
 
   const [allCustomers, setAllCustomers] = useState<CustomerType[] | undefined>()
