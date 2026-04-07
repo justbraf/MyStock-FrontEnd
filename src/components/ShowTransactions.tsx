@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+import ShowTransaction from "./ShowTransaction"
 
 const ShowTransactions = () => {
     interface TransactionsType {
@@ -34,7 +35,7 @@ const ShowTransactions = () => {
         fetch(getTransactionsReq)
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
+                console.log(data)
                 setAllTransactions(data)
             })
     }, [])
@@ -43,7 +44,11 @@ const ShowTransactions = () => {
         <>
             <div>ShowTransactions</div>
             {allTransactions && allTransactions.length > 0 ?
-                <p>Transcations found</p>
+                allTransactions.map((trans: TransactionType) => {
+                    return (
+                        <ShowTransaction key={trans._id} transData={trans} />
+                    )
+                })
                 :
                 <p>No Transactions Found.</p>
             }
