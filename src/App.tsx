@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router"
-import HomePage from "./components/HomePage"
+import HomePage from "./pages/HomePage"
 import NavBar from "./components/NavBar"
-import ShowCustomers from "./components/ShowCustomers"
-import NotFound from "./components/NotFound"
-import ShowTransactions from "./components/ShowTransactions"
+import ShowCustomers from "./pages/ShowCustomers"
+import NotFound from "./pages/NotFound"
+import ShowTransactions from "./pages/ShowTransactions"
 
 function App() {
 
