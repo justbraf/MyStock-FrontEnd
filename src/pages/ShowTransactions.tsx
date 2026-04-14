@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import ShowTransaction from "./ShowTransaction"
+import ShowTransaction from "../components/ShowTransaction"
 
 const ShowTransactions = () => {
     interface TransactionsType {
