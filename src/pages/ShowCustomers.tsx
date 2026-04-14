@@ -14,6 +14,7 @@ const ShowCustomers = () => {
   }
 
   const [allCustomers, setAllCustomers] = useState<CustomerType[] | undefined>()
+  const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[] | undefined>()
   const [pageNum, setPageNum] = useState<number>(1)
 
   const fetchCustomers = (pgNum: number) => {
@@ -27,7 +28,8 @@ const ShowCustomers = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data[0])
-        setAllCustomers(data);
+        setAllCustomers(data)
+        setFilteredCustomers(data)
       })
   }
 
@@ -39,24 +41,38 @@ const ShowCustomers = () => {
     setPageNum(pg => pg + 1)
   }
   const handlePagePrev = () => {
-    setPageNum(pg => pg - 1)
+    setPageNum(pg => pg - 1 <= 0 ? 1 : pg - 1)
+  }
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value
+    setFilteredCustomers(
+      allCustomers?.filter(cust => {
+        if (cust.firstname.toLowerCase().includes(searchTerm.toLowerCase()) || cust.lastname.toLowerCase().includes(searchTerm.toLowerCase()))
+          return cust
+      })
+    )
   }
 
   return (
-    <>
-      <div className="justify-center">Customer List</div>
-      {allCustomers && allCustomers.length > 0 ? (
-        allCustomers.map((customer: CustomerType) => {
-          return <ShowCustomer key={customer._id} cust={customer} />;
-        })
-      ) : (
-        <p>No Customers Found.</p>
-      )}
+    <div className="flex flex-col items-center">
+      <div className=" text-2xl">Customer List</div>
+      <div className=""><input onChange={handleSearch} className="border m-2 p-1 w-50" type="text" /></div>
+      <div className="grid grid-cols-2 gap-4">
+
+        {filteredCustomers && filteredCustomers.length > 0 ? (
+          filteredCustomers.map((customer: CustomerType) => {
+            return <ShowCustomer key={customer._id} cust={customer} />;
+          })
+        ) : (
+          <p>No Customers Found.</p>
+        )}
+      </div>
       <div className="justify-between">
         <div className="border p-2 w-24 cursor-pointer" onClick={handlePagePrev}>Prev</div>
         <div className="border p-2 w-24 cursor-pointer" onClick={handlePageNext}>Next</div>
       </div>
-    </>
+    </div>
   );
 };
 

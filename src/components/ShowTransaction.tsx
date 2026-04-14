@@ -38,6 +38,7 @@ const ShowTransaction = ({ transData }: { transData: TransactionType }) => {
             <button className="border-2 p-2 cursor-pointer" onClick={handleAddFave}>Add To Faves</button>
             <div>Account NUmber: {transData.account_id}</div>
             <div>Number of Transactions: {transData.transaction_count}</div>
+            <div className="grid grid-cols-3">
             {
                 transData.transactions.map((trn: TransactionsType) => {
                     return (
@@ -52,6 +53,7 @@ const ShowTransaction = ({ transData }: { transData: TransactionType }) => {
                     )
                 })
             }
+            </div>
         </div>
     )
 }
