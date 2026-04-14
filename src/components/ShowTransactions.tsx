@@ -20,7 +20,7 @@ const ShowTransactions = () => {
         transactions: TransactionsType[]
     }
 
-    const [allTransactions, setAllTransactions] = useState<TransactionType[] | undefined>()
+    const [allTransaction, setAllTransaction] = useState<TransactionType>()
 
     const { acctID } = useParams() // acctID is the account number
     const getTransactionsURL = `http://localhost:3000/transactions/${acctID}`
@@ -35,22 +35,18 @@ const ShowTransactions = () => {
         fetch(getTransactionsReq)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                setAllTransactions(data)
+                // console.log(data)
+                setAllTransaction(data)
             })
-    }, [])
+    },)
 
     return (
         <>
             <div>ShowTransactions</div>
-            {allTransactions && allTransactions.length > 0 ?
-                allTransactions.map((trans: TransactionType) => {
-                    return (
-                        <ShowTransaction key={trans._id} transData={trans} />
-                    )
-                })
+            {allTransaction ?
+                <ShowTransaction transData={allTransaction} />
                 :
-                <p>No Transactions Found.</p>
+                <p>No Transactions Found!</p>
             }
         </>
     )

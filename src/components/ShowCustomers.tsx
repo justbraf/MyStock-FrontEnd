@@ -13,7 +13,7 @@ const ShowCustomers = () => {
     accounts: number[]
   }
 
-  const [allCustomers, setAllCustomers] = useState<CustomerType[] | undefined>()
+  const [allCustomers, setAllCustomers] = useState<CustomerType[]>()
   const getCustomersURL = "http://localhost:3000/customers"
   const getCustomersReq = new Request(
     getCustomersURL, {
