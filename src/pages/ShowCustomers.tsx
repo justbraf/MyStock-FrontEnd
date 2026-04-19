@@ -55,25 +55,27 @@ const ShowCustomers = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <>
       <div className=" text-2xl">Customer List</div>
-      <div className=""><input onChange={handleSearch} className="border m-2 p-1 w-50" type="text" /></div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className=""><input onChange={handleSearch} className="border m-2 p-1 w-50" type="text" id="search" /></div>
+      <div className="columns-3 gap-4">
+        <div className="aspect-auto">
 
-        {filteredCustomers && filteredCustomers.length > 0 ? (
-          filteredCustomers.map((customer: CustomerType) => {
-            return <ShowCustomer key={customer._id} cust={customer} />;
-          })
-        ) : (
-          <p>No Customers Found.</p>
-        )}
+          {filteredCustomers && filteredCustomers.length > 0 ? (
+            filteredCustomers.map((customer: CustomerType) => {
+              return <ShowCustomer key={customer._id} cust={customer} />;
+            })
+          ) : (
+            <p>No Customers Found.</p>
+          )}
+        </div>
       </div>
-      <div className="justify-between">
-        <div className="border p-2 w-24 cursor-pointer" onClick={handlePagePrev}>Prev</div>
-        <div className="border p-2 w-24 cursor-pointer" onClick={handlePageNext}>Next</div>
+      <div className="flex justify-around mt-3">
+        <div className="border p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePagePrev}>Prev</div>
+        <div className="border p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePageNext}>Next</div>
       </div>
-    </div>
-  );
-};
+    </>
+  )
+}
 
 export default ShowCustomers;
