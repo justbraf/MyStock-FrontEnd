@@ -62,30 +62,29 @@ const ShowCustomers = () => {
     // fragment to hold JSX elements because a component can only render a single JSX element
     <>
       <div className=" text-2xl">Customer List</div>
-      <div className="">
+      <div className="flex justify-end px-19 w-full">
+        <h3 className="text-2xl p-2">Search</h3>
         {/* trigger the handleSearch function every time a change event is detected on the input element */}
         <input onChange={handleSearch} className="border m-2 p-1 w-50" type="text" id="search" />
       </div>
-      <div className="columns-3 gap-4">
-        <div className="aspect-auto">
-          {/* check if the filteredCustomers state variable is null or has zero indexes */}
-          {filteredCustomers && filteredCustomers.length > 0 ? (
-            // the array method map creates a new array by executing a specified transformation function
-            // Here the usage is to convert the data in each index into a JSX element
-            filteredCustomers.map((customer: CustomerType) => {
-              // Since each element has a consistent look, we use a component
-              // a unique key must be specified for each copy and each index is passed to it
-              return (
-                <Link to={"/show/" + customer.username} key={customer._id} >
-                  <ShowCustomer cust={customer} mode={false} />
-                </Link>
-              )
-            })
-          ) : (
-            // else component for the ternary operator
-            <p>No Customers Found.</p>
-          )}
-        </div>
+      <div className="flex flex-wrap gap-8 justify-center">
+        {/* check if the filteredCustomers state variable is null or has zero indexes */}
+        {filteredCustomers && filteredCustomers.length > 0 ? (
+          // the array method map creates a new array by executing a specified transformation function
+          // Here the usage is to convert the data in each index into a JSX element
+          filteredCustomers.map((customer: CustomerType) => {
+            // Since each element has a consistent look, we use a component
+            // a unique key must be specified for each copy and each index is passed to it
+            return (
+              <Link to={"/show/" + customer.username} key={customer._id} >
+                <ShowCustomer cust={customer} mode={false} />
+              </Link>
+            )
+          })
+        ) : (
+          // else component for the ternary operator
+          <p>No Customers Found.</p>
+        )}
       </div>
       <div className="flex justify-around mt-3">
         <div className="border rounded p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePagePrev}>Prev</div>
