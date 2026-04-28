@@ -5,7 +5,7 @@ import type { CustomerType } from "./dataInterfaces"
 // component has a parameter called mode to determine what data to show
 const ShowCustomer = ({ cust, mode }: { cust: CustomerType, mode: boolean }) => {
     return (
-        <div key={cust._id} className={mode?"mb-3 p-3 border-2 w-100":"mb-3 p-3 border-2 w-75"}>
+        <div key={cust._id} className={mode?"mb-3 p-3 border w-1/3":"mb-3 p-3 border-2 w-75"}>
             {/* mode && will render the elements on the right, only if mode is true */}
             {mode && <div>Username: {cust.username}</div>}
             <div>Customer: {cust.firstname} {cust.lastname}</div>
@@ -14,10 +14,10 @@ const ShowCustomer = ({ cust, mode }: { cust: CustomerType, mode: boolean }) => 
                 <p>{cust.address}</p>
             </div>}
             <div>Birthday: {format(new Date(cust.birthdate), 'MMM DD YYYY')}</div>
-            {mode && <div className="py-3">Accounts:
+            {mode && <div className="py-3 flex flex-wrap">Accounts:
                 {cust.accounts.map((acct: number) => {
                     return (
-                        <Link className="mx-2 p-2 border" to={`/transactions/${acct}`} key={acct}>{acct}</Link>
+                        <Link className="m-2 p-2 border w-18" to={`/transactions/${acct}`} key={acct}>{acct}</Link>
                     )
                 })}
             </div>}

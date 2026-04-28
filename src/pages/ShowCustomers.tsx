@@ -76,8 +76,8 @@ const ShowCustomers = () => {
               // Since each element has a consistent look, we use a component
               // a unique key must be specified for each copy and each index is passed to it
               return (
-                <Link to={"/show/" + customer.username}>
-                  <ShowCustomer key={customer._id} cust={customer} mode={false} />
+                <Link to={"/show/" + customer.username} key={customer._id} >
+                  <ShowCustomer cust={customer} mode={false} />
                 </Link>
               )
             })
@@ -88,8 +88,8 @@ const ShowCustomers = () => {
         </div>
       </div>
       <div className="flex justify-around mt-3">
-        <div className="border p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePagePrev}>Prev</div>
-        <div className="border p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePageNext}>Next</div>
+        <div className="border rounded p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePagePrev}>Prev</div>
+        <div className="border rounded p-2 w-24 cursor-pointer justify-center flex hover:bg-slate-300" onClick={handlePageNext}>Next</div>
       </div>
     </>
   )

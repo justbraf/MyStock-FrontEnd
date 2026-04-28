@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ShowCustomer from "../components/ShowCustomer";
 import type { CustomerType } from "../components/dataInterfaces";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 // declare React component
 const ShowOneCustomer = () => {
@@ -33,6 +33,13 @@ const ShowOneCustomer = () => {
   }, [uname]); // the square brackets is for dependecies of the useEffect() method
   // and it will automatically re-render the useEffect whenever the dependcy changes
 
+  // useNaviagte hook from React router allows the programatic control of navigation
+  const navigate = useNavigate()
+  const handleGoBack = () => {
+    // Go back one page
+    navigate(-1)
+  }
+
   // JSX components to be rendered
   return (
     // fragment to hold JSX elements because a component can only render a single JSX element
@@ -42,6 +49,7 @@ const ShowOneCustomer = () => {
         {/* check if the filteredCustomers state variable is null or has zero indexes */}
         {customerUno && <ShowCustomer cust={customerUno} mode={true} />}
       </div>
+      <div><button className="p-2 border rounded bg-teal-200 hover:bg-teal-600" onClick={handleGoBack}>Go Back</button></div>
     </>
   )
 }

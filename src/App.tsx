@@ -10,22 +10,24 @@ function App() {
 
   return (
     <>
-      <NavBar /> {/* reusuable navbar component */}
-      <Routes>
-        {/* Define the URL routes and the pages they will load */}
-        {/* Routes are processed in the order they  are listed */}
+      <div className="bg-slate-50 h-dvh mx-9">
+        <NavBar /> {/* reusuable navbar component */}
+        <Routes>
+          {/* Define the URL routes and the pages they will load */}
+          {/* Routes are processed in the order they  are listed */}
 
-        {/* index is a child route that renders at the exact URL of its parent, in this case path="/" */}
-        <Route index element={<HomePage />} />
-        <Route path="/show" element={<ShowCustomers />} />
-        <Route path="/show/:uname" element={<ShowOneCustomer />} />
+          {/* index is a child route that renders at the exact URL of its parent, in this case path="/" */}
+          <Route index element={<HomePage />} />
+          <Route path="/show" element={<ShowCustomers />} />
+          <Route path="/show/:uname" element={<ShowOneCustomer />} />
 
-        {/* This route has a parameter variable denoted by the colon followed by a variable name */}
-        <Route path="/transactions/:acctID" element={<ShowTransactions />} />
+          {/* This route has a parameter variable denoted by the colon followed by a variable name */}
+          <Route path="/transactions/:acctID" element={<ShowTransactions />} />
 
-        {/* The asterisk matches all routes */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* The asterisk matches all routes */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </>
   )
 }
