@@ -1,24 +1,12 @@
+import { useState } from "react"
+import type { TransactionsType, TransactionType } from "./dataInterfaces"
+import MessageResponse from "./MessageResponse"
 
-interface TransactionsType {
-    date: Date,
-    amount: number,
-    transaction_code: string,
-    symbol: string,
-    price: string,
-    total: string
-}
-interface TransactionType {
-    _id: string,
-    account_id: number,
-    transaction_count: number,
-    bucket_start_date: Date,
-    bucket_end_date: Date,
-    transactions: TransactionsType[]
-}
 
 const ShowTransaction = ({ transData }: { transData: TransactionType }) => {
+    const [messageResp, setMessageResp] = useState<{ message: string }>()
+
     const handleAddFave = () => {
-        // console.log("Add To Faves", transData.account_id)
         const addFaveReq = new Request(
             `http://localhost:3000/faves/add/${transData.account_id}`,
             {
@@ -26,10 +14,11 @@ const ShowTransaction = ({ transData }: { transData: TransactionType }) => {
             }
         )
         fetch(addFaveReq)
-        .then(res => res.json())
-        .then(msg =>{
-            console.log(msg)
-        })
+            .then(res => res.json())
+            .then(msg => {
+                // saved add to faves response message
+                setMessageResp(msg)
+            })
 
     }
 
@@ -39,21 +28,23 @@ const ShowTransaction = ({ transData }: { transData: TransactionType }) => {
             <div>Account NUmber: {transData.account_id}</div>
             <div>Number of Transactions: {transData.transaction_count}</div>
             <div className="grid grid-cols-3">
-            {
-                transData.transactions.map((trn: TransactionsType) => {
-                    return (
-                        <div className="m-1 border-1">
-                            <div>Date: {trn.date.toString()}</div>
-                            <div>Amount: {trn.amount}</div>
-                            <div>Transaction Code: {trn.transaction_code}</div>
-                            <div>Symbol: {trn.symbol}</div>
-                            <div>Price: {trn.price}</div>
-                            <div>Total: {trn.total}</div>
-                        </div>
-                    )
-                })
-            }
+                {
+                    transData.transactions.map((trn: TransactionsType) => {
+                        return (
+                            <div className="m-1 border">
+                                <div>Date: {trn.date.toString()}</div>
+                                <div>Amount: {trn.amount}</div>
+                                <div>Transaction Code: {trn.transaction_code}</div>
+                                <div>Symbol: {trn.symbol}</div>
+                                <div>Price: {trn.price}</div>
+                                <div>Total: {trn.total}</div>
+                            </div>
+                        )
+                    })
+                }
             </div>
+            {/* If there is a response message from adding to faves, then show the message */}
+            {messageResp?.message != undefined && <MessageResponse msg={messageResp?.message} setMsg={setMessageResp} />}
         </div>
     )
 }
